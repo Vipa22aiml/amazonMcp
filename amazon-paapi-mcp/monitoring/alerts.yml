@@ -1,0 +1,39 @@
+groups:
+  - name: amazon_mcp_alerts
+    interval: 30s
+    rules:
+      - alert: HighErrorRate
+        expr: rate(amazon_paapi_calls_total{status="error"}[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High PA API error rate detected"
+          description: "Error rate is {{ $value }} per second"
+      
+      - alert: RateLimitApproaching
+        expr: rate_limit_daily_requests > 8000
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Daily rate limit approaching"
+          description: "Used {{ $value }} of 8640 daily requests"
+      
+      - alert: CircuitBreakerOpen
+        expr: circuit_breaker_state == 1
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Circuit breaker is OPEN"
+          description: "API calls are being blocked due to failures"
+      
+      - alert: LowCacheHitRatio
+        expr: cache_hit_ratio < 50
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Cache hit ratio is low"
+          description: "Cache hit ratio is {{ $value }}%"

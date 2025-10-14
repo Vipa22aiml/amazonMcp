@@ -1,0 +1,55 @@
+{
+  "dashboard": {
+    "title": "Amazon MCP Server Monitoring",
+    "panels": [
+      {
+        "title": "API Calls per Minute",
+        "targets": [
+          {
+            "expr": "rate(amazon_paapi_calls_total[1m])"
+          }
+        ]
+      },
+      {
+        "title": "API Success Rate",
+        "targets": [
+          {
+            "expr": "sum(rate(amazon_paapi_calls_total{status='success'}[5m])) / sum(rate(amazon_paapi_calls_total[5m])) * 100"
+          }
+        ]
+      },
+      {
+        "title": "Cache Hit Ratio",
+        "targets": [
+          {
+            "expr": "cache_hit_ratio"
+          }
+        ]
+      },
+      {
+        "title": "Rate Limit Usage",
+        "targets": [
+          {
+            "expr": "rate_limit_daily_requests"
+          }
+        ]
+      },
+      {
+        "title": "Tool Invocation Rate",
+        "targets": [
+          {
+            "expr": "rate(mcp_tool_invocations_total[1m])"
+          }
+        ]
+      },
+      {
+        "title": "P95 Response Time",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.95, rate(mcp_tool_duration_seconds_bucket[5m]))"
+          }
+        ]
+      }
+    ]
+  }
+}
