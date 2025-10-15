@@ -1,8 +1,10 @@
+![AI-Powered Amazon Shopping Assistant Hero Image](Generated_image.png)
+
 # 🤖 AI-Powered Amazon Shopping Assistant for ChatGPT
 
 **Shop smarter, not harder. Discover the perfect products on Amazon through natural conversations directly within ChatGPT.**
 
-![AI-Powered Amazon Shopping Assistant Hero Image]
+ 
 
 
 
